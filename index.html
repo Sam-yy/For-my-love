@@ -110,7 +110,8 @@ I’m so lucky to have you in my life.Every moment with you is a treasure. You l
 <script>
 // --- Anniversary Countdown ---
 function updateCountdown() {
-  const anniversary = new Date("2025-05-24"); // ← Replace with your special date
+ const anniversary = new Date(2025, 4, 24); // Month is 0-based: 0 = Jan, 4 = May
+ // ← Replace with your special date
   const now = new Date();
   const diff = now - anniversary;
   if (diff < 0) {
