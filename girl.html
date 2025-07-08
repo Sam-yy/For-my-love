@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For My Love 💕</title>
+<style>
+  body {
+    background: #ffe6f0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow-x: hidden;
+    margin: 0; padding: 0;
+    text-align: center;
+    color: #ff3366;
+  }
+  h1 {
+    margin-top: 30px;
+    font-size: 2.5rem;
+  }
+  #personal-message {
+    font-size: 1.5rem;
+    margin: 10px auto 30px auto;
+    max-width: 600px;
+    line-height: 1.4;
+    font-style: normal;
+  }
+  #countdown {
+    font-size: 1.8rem;
+    margin: 20px 0;
+  }
+  /* Falling hearts styles */
+  .heart {
+    position: fixed;
+    top: -50px;
+    color: #ff3366;
+    font-size: 24px;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+  /* Photo slideshow */
+  #slideshow {
+    width: 300px;
+    height: 200px;
+    margin: 20px auto;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #ff3399aa;
+    overflow: hidden;
+    position: relative;
+  }
+  #slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+  }
+  #slideshow img.active {
+    opacity: 1;
+    position: relative;
+  }
+  /* Controls */
+  .btn {
+    cursor: pointer;
+    background: #ff3399cc;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border-radius: 25px;
+    font-size: 1rem;
+    user-select: none;
+  }
+  .btn:hover {
+    background: #ff0055;
+  }
+</style>
+</head>
+<body>
+
+<h1>To My Beloved 💖</h1>
+<div id="personal-message">
+  Every moment with you feels like a beautiful dream come true.
+I’m so lucky to have you in my life.Every moment with you is a treasure. You light up my world in ways words can’t describe.<br> Forever yours.<br>
+</div>
+
+<div id="countdown">Loading anniversary countdown...</div>
+
+<div id="slideshow">
+  <img src="supernatural spn spnfamily dean forrester house of wax gilmore girls sam winchester jared padalecki young 2000s icon.jpg" alt="Photo 1" class="active" />
+  <img src="https://images.unsplash.com/photo-1518976024611-96b3f37a56e0?auto=format&fit=crop&w=300&q=80" alt="Photo 2" />
+  <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=300&q=80" alt="Photo 3" />
+</div>
+
+<button class="btn" id="prevBtn">Previous</button>
+<button class="btn" id="nextBtn">Next</button>
+
+<audio id="music" src="https://cdn.pixabay.com/download/audio/2022/03/18/audio_cdb6d49e4b.mp3?filename=romantic-guitar-music-6279.mp3" loop></audio>
+<button class="btn" id="playPauseBtn">Play Music ▶️</button>
+
+<script>
+// --- Anniversary Countdown ---
+function updateCountdown() {
+  const anniversary = new Date("2025-5-24"); // ← Replace with your special date
+  const now = new Date();
+  const diff = now - anniversary;
+  if (diff < 0) {
+    document.getElementById("countdown").textContent = "Our special day is coming soon!";
+    return;
+  }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").textContent = `We’ve been together for ${days} days! ❤️`;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000 * 60 * 60); // Update every hour
+
+// --- Photo Slideshow ---
+const slides = document.querySelectorAll("#slideshow img");
+let currentSlide = 0;
+
+function showSlide(index) {
+  slides.forEach((img, i) => {
+    img.classList.toggle("active", i === index);
+  });
+}
+
+document.getElementById("nextBtn").onclick = () => {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+};
+
+document.getElementById("prevBtn").onclick = () => {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+};
+
+// --- Falling Hearts ---
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+  heart.style.animationDuration = (Math.random() * 5 + 3) + "s";
+  heart.style.opacity = Math.random();
+  heart.textContent = "❤️";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 8000);
+}
+
+setInterval(createHeart, 300);
+
+// --- Music Play/Pause ---
+const music = document.getElementById("music");
+const playPauseBtn = document.getElementById("playPauseBtn");
+
+playPauseBtn.onclick = () => {
+  if (music.paused) {
+    music.play();
+    playPauseBtn.textContent = "Pause Music ⏸️";
+  } else {
+    music.pause();
+    playPauseBtn.textContent = "Play Music ▶️";
+  }
+};
+</script>
+
+</body>
+</html>
+
